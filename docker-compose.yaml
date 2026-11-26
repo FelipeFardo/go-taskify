@@ -1,0 +1,17 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: taskify-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${TASKIFY_DB_NAME}
+      POSTGRES_USER: ${TASKIFY_DB_USER}
+      POSTGRES_PASSWORD: ${TASKIFY_DB_PASSWORD}
+    ports:
+      - "${TASKIFY_DB_PORT:-5432}:5432"
+    volumes:
+      - db:/var/lib/postgresql
+
+volumes:
+  db:
+    driver: local
